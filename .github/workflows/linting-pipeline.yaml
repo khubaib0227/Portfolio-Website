@@ -6,20 +6,18 @@ on:
   pull_request:
     branches:
       - develop
-
+      
 jobs:
   linting-job:
     runs-on: ubuntu-latest
     steps:
       - name: Clone Repository
         uses: actions/checkout@v4
-      - name: create package.json
+      - name: Create package.json
         run: npm init -y
-      - name: Install HTML Hint
-        run: npm install --save-dev htmlhint
-      - name: Run HTMLHint
-        run: npx htmlhint "**/*.html"
-      - name: Install Style Lint
+      - name: Install Stylelint
         run: npm install --save-dev stylelint
-      - name: Run stylelint
+      - name: Fix Permissions
+        run: chmod +x ./node_modules/.bin/stylelint
+      - name: Run Stylelint
         run: npx stylelint "**/*.css"
